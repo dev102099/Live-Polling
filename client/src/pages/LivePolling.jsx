@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { socket } from "../socket"; // Ensure this path is correct
+import { socket } from "../socket";
 
-// --- Helper Icons (as inline SVGs for easy use) ---
 const ClockIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +84,6 @@ export default function LivePolling() {
     };
   }, []);
 
-  // Synchronized Timer Logic
   useEffect(() => {
     if (!poll || !poll.endTime) {
       setTimeLeft(0);
@@ -99,7 +97,7 @@ export default function LivePolling() {
       setTimeLeft(newTimeLeft);
     };
 
-    updateTimer(); // Update immediately on load
+    updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
 
     return () => clearInterval(timerInterval);
@@ -237,7 +235,6 @@ export default function LivePolling() {
           </div>
         </div>
 
-        {/* Submit Button (only shown during answering phase) */}
         {!showResults && (
           <div className="flex justify-center mt-8">
             <button

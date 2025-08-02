@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { socket } from "../socket"; // Ensure this path is correct
+import { socket } from "../socket";
 
-// --- Helper Icons ---
 const EyeIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +45,6 @@ export default function TeacherResultsView() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // --- Ask the server for the current poll state when the component loads ---
     socket.emit("get_current_poll");
 
     // --- Socket Event Listeners ---
@@ -64,7 +62,7 @@ export default function TeacherResultsView() {
     const handlePollEnd = (finalResultsData) => {
       console.log("Teacher received final poll results:", finalResultsData);
       setFinalResults(finalResultsData);
-      setLiveResults(finalResultsData.results); // Lock in the final counts
+      setLiveResults(finalResultsData.results);
       setIsPollActive(false);
     };
 
@@ -73,13 +71,12 @@ export default function TeacherResultsView() {
     socket.on("update_results", handleUpdateResults);
     socket.on("pollEnded", handlePollEnd);
 
-    // Cleanup function to remove listeners
     return () => {
       socket.off("current_poll_data", handleCurrentPoll);
       socket.off("update_results", handleUpdateResults);
       socket.off("pollEnded", handlePollEnd);
     };
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }, []);
 
   const handleAskNewQuestion = () => {
     navigate("/teachers-polling");

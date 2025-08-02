@@ -1,6 +1,5 @@
 import React from "react";
 
-// Icon Components (as inline SVGs for easy use)
 const SparklesIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +38,6 @@ const ChatIcon = () => (
   </svg>
 );
 
-// Main Component for the Student Waiting Screen
 export default function WaitingPage() {
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-center p-4 font-sans relative">
