@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
 
-const URL = "http://localhost:3002";
+const URL = "https://live-polling-backend-gwwg.onrender.com";
 
 export const socket = io(URL);

@@ -1,4 +1,3 @@
-// This object will hold the state of the currently active poll.
 let currentPoll = null;
 
 const ioHandler = (io) => {
@@ -6,13 +5,8 @@ const ioHandler = (io) => {
     console.log(`${socket.id} connected.`);
     socket.join("pollRoom");
 
-    // --- THIS IS THE FIX ---
-    // This listener allows clients (like the teacher's results page) to
-    // request the current poll data at any time.
     socket.on("get_current_poll", () => {
       if (currentPoll) {
-        // Send the full poll data directly back to the client that asked for it.
-        // This is crucial for the teacher's view.
         socket.emit("current_poll_data", currentPoll);
       }
     });
@@ -31,7 +25,6 @@ const ioHandler = (io) => {
         endTime: endTime,
       };
 
-      // Create a version of the poll for clients that doesn't include the correct answer.
       const pollForClients = {
         question: pollData.question,
         options: pollData.options.map(({ id, text }) => ({ id, text })),
