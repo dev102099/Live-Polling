@@ -20,7 +20,12 @@ export default function App() {
       alert(`Continuing as: ${selectedRole}`);
       socket.emit("role", selectedRole);
       dispatch(setRole(selectedRole));
-      navigate("/details");
+      if (selectedRole === "teacher") {
+        navigate("/teachers-polling");
+      }
+      if (selectedRole === "student") {
+        navigate("/details");
+      }
     } else {
       alert("Please select a role to continue.");
     }
